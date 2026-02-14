@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Navigation Menu</title>
+
+    <style>
+        /* Remove default spacing */
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: blue;
+            padding: 15px;
+            position: fixed;   /* Makes it stay at top */
+            top: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Menu Links */
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+        }
+
+        /* Hover Effect */
+        nav a:hover {
+            color: yellow;
+        }
+
+        /* Space below navbar */
+        .content {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        /* Just to create scroll */
+        .big-box {
+            height: 1200px;
+            background-color: lightgray;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <nav id="navbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="content">
+        <h1>Scroll Down</h1>
+        <p>The menu changes color when you scroll.</p>
+        <div class="big-box"></div>
+    </div>
+
+    <script>
+        // When user scrolls
+        window.onscroll = function() {
+
+            var navbar = document.getElementById("navbar");
+
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = "red";
+            } else {
+                navbar.style.backgroundColor = "blue";
+            }
+        };
+    </script>
+
+</body>
+</html>

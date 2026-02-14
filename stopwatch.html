@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stopwatch</title>
+
+    <!-- Simple styling include css part-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #c86c6c;
+        }
+
+        #display {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Stopwatch</h1>
+
+    <!-- Time display -->
+    <div id="display">00:00:00</div>
+
+    <!-- Buttons -->
+    <button onclick="start()">Start</button>
+    <button onclick="pause()">Pause</button>
+    <button onclick="reset()">Reset</button>
+    <button onclick="lap()">Lap</button>
+
+    <!-- Lap times -->
+    <h3>Lap Times</h3>
+    <ul id="laps"></ul>
+<!-- javascript part -->
+    <script>
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+        let timer = null;
+
+        // Update the stopwatch display
+        function updateDisplay() {
+            let h = hours < 10 ? "0" + hours : hours;
+            let m = minutes < 10 ? "0" + minutes : minutes;
+            let s = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById("display").innerText = h + ":" + m + ":" + s;
+        }
+
+        // Start the stopwatch
+        function start() {
+            if (timer !== null) return; // prevent multiple timers
+
+            timer = setInterval(() => {
+                seconds++;
+
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours++;
+                }
+
+                updateDisplay();
+            }, 1000);
+        }
+
+        // Pause the stopwatch
+        function pause() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        // Reset the stopwatch
+        function reset() {
+            pause();
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            updateDisplay();
+            document.getElementById("laps").innerHTML = "";
+        }
+
+        // Record lap time
+        function lap() {
+            let lapTime = document.getElementById("display").innerText;
+            let li = document.createElement("li");
+            li.innerText = lapTime;
+            document.getElementById("laps").appendChild(li);
+        }
+    </script>
+
+</body>
+</html>
